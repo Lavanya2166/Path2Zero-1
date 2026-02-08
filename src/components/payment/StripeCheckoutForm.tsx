@@ -103,17 +103,21 @@ export const StripeCheckoutForm = ({
       }
 
       // Create payment intent on the server
-      const response = await fetch("/server/api/create-payment-intent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount: Math.round(amount * 100),
-          currency: "USD",
-          projectId,
-          tonnes,
-          userId,
-        }),
-      });
+      const response = await fetch(
+  `${import.meta.env.VITE_API_BASE_URL}/create-payment-intent`,
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      amount: Math.round(amount * 100),
+      currency: "USD",
+      projectId,
+      tonnes,
+      userId,
+    }),
+  }
+);
+
 
       const data = await response.json();
 
